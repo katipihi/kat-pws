@@ -19,41 +19,35 @@ public class ConeDetection extends OpenCvPipeline {
 
     double endHSV = 10.0;
 
+    //blue
+//    public static Scalar scalarLowerHSV = new Scalar(78, 100, 142);//HSV for now
+//    public static Scalar scalarUpperHSV = new Scalar(138, 255, 255);//HSV for now
+
+    //red
+    public static Scalar scalarLowerHSV = new Scalar(0, 40, 20);//HSV for now
+    public static Scalar scalarUpperHSV = new Scalar(10, 255.0, 255.0);//HSV for now
+
+//    private double BLH;     //fraction of pixels from the left side of the cam to skip
+//    private double BRH;    //fraction of pixels from the right of the cam to skip
+//    private double BTV;      //fraction of pixels from the top of the cam to skip
+//    private double BBV;
+//
+//    public ConeDetection(double borderLeftX, double borderRightX, double borderTopY, double borderBottomY) {
+//        this.BLH = borderLeftX;
+//        this.BRH = borderRightX;
+//        this.BTV = borderTopY;
+//        this.BBV = borderBottomY;
+//    }
+
     @Override
     public Mat processFrame(Mat input) {
+
 
         //entire thing has to be in a try catch other wise if a contour is not found it will throw and error and stop running
         try {
             Mat end = input;
 
             Mat src = input;
-
-            //Freight Frenzy CV goal- to detect a custom team shipping element and determine which tape mark it is at- the left, middle, or right
-
-
-            //this is YCRCB - Scalar scalarLowerYCrCb = new Scalar(0.0, 0.0, 0.0);
-            //this is YCRCB - Scalar scalarUpperYCrCb = new Scalar(255.0, 100.0, 170.0);
-
-            //those are hard to figure out ^^^^^^^^^^^ but they are in the Y CR CB color space
-
-            //forming a color range
-            //pick a range of HSV colors that aren't too specific nor general- they should contain the color of object you are trying to find in the range
-
-// blue
-            Scalar scalarLowerHSV = new Scalar(78, 100, 142);//HSV for now
-            Scalar scalarUpperHSV = new Scalar(138, 255, 255);//HSV for now
-             // red
-            //Scalar scalarLowerHSV = new Scalar(0, 40, 20);//HSV for now
-           // Scalar scalarUpperHSV = new Scalar(10, 255.0, 255.0);//HSV for now
-
-
-            //Those are the boundaries of the accepted colors in HSV
-
-            //open cv- Hue goes to 179, the other two go to 255
-            //google - Hue goes to 360, the other two are percentages out of 100%
-
-            //I found that translating them doesn't really work so I just made an easier range finder: https://tejusk2.github.io/FTCVISION/
-
 
 
             //gets the image ready for contour detection
@@ -65,7 +59,7 @@ public class ConeDetection extends OpenCvPipeline {
             Core.inRange(src, scalarLowerHSV, scalarUpperHSV, src);
             // Remove Noise
             //choose one or the other or they cancel things out, I AM USING CLOSE and it is being used in the range finder
-            //Imgproc.morphologyEx(src, src, Imgproc.MORPH_OPEN, new Mat());
+            Imgproc.morphologyEx(src, src, Imgproc.MORPH_OPEN, new Mat());
             Imgproc.morphologyEx(src, src, Imgproc.MORPH_CLOSE, new Mat());
             // GaussianBlur
             Imgproc.blur(src, src, new Size(10, 10));
