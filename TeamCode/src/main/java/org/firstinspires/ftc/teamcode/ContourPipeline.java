@@ -16,7 +16,7 @@ import java.util.List;
 
 // Credits to team 7303 RoboAvatars, adjusted by team 3954 Pink to the Future
 
-public class ContourPipeline extends OpenCvPipeline {
+public class  ContourPipeline extends OpenCvPipeline {
     Scalar HOT_PINK = new Scalar(196, 23, 112);
 
     // Pink, the default color                         Y      Cr     Cb    (Do not change Y)
