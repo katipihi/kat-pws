@@ -114,3 +114,4 @@ public class slay2 extends LinearOpMode {
         if(value > max){ value = max; }
         return value;
     }
+}
